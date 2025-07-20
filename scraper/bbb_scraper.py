@@ -60,7 +60,7 @@ def get_principal_contact(page) -> str:
 
 def scrape_bbb():
     """
-    Scrapes A‑rated Medical Billing listings from BBB.org (pages 1–15),
+    Scrapes A-rated Medical Billing listings from BBB.org (pages 1-15),
     visits each profile to pull principal contact, accreditation, and address,
     deduplicates on (name, phone), and writes results to medical_billing_companies.csv.
     """
@@ -95,7 +95,7 @@ def scrape_bbb():
 
             # 1.a) DEBUG: print a snippet of the loaded HTML
             html_snip = page.content()[:2000]
-            print("⏩ HTML snippet:", html_snip)
+            print(" HTML snippet:", html_snip)
 
             # 2) Dismiss cookie banner if it appears
             if page.is_visible("button:has-text('Accept All Cookies')"):
@@ -106,7 +106,7 @@ def scrape_bbb():
             try:
                 page.wait_for_selector("div.card.result-card", state="attached", timeout=20_000)
             except:
-                print("⚠️  div.card.result-card not found, falling back to h3 selector")
+                print("!! div.card.result-card not found, falling back to h3 selector")
                 page.wait_for_selector("h3.result-business-name", timeout=20_000)
 
             # 4) Extract cards from the list page
@@ -209,7 +209,7 @@ def scrape_bbb():
             try:
                 page.wait_for_selector("div.card.result-card", state="attached", timeout=20000)
             except:
-                print("⚠️  div.card.result-card not found, falling back to h3 selector")
+                print("!! div.card.result-card not found, falling back to h3 selector")
                 page.wait_for_selector("h3.result-business-name", timeout=20000)
 
 
@@ -250,7 +250,7 @@ def scrape_bbb():
 
                 seen.add(key)
                 results.append(entry)
-                time.sleep(1)  # polite delay
+                time.sleep(1)
 
         browser.close()
 
