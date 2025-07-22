@@ -3,5 +3,6 @@ node_modules
 tmp
 downloads
 .DS_Store
+**/.DS_Store
 dist
 cache.json

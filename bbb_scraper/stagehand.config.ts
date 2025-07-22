@@ -14,7 +14,7 @@ const StagehandConfig: ConstructorParams = {
   } /* Configuration options for the model client */,
 
   // Browser configuration
-  env: "BROWSERBASE" /* Environment to run in: LOCAL or BROWSERBASE */,
+  env: "LOCAL" /* Environment to run in: LOCAL or BROWSERBASE */,
   apiKey: process.env.BROWSERBASE_API_KEY /* API key for authentication */,
   projectId: process.env.BROWSERBASE_PROJECT_ID /* Project identifier */,
   browserbaseSessionID:
