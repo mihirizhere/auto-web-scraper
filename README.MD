@@ -1,20 +1,7 @@
 # BBB Medical Billing Scraper
 
 A three‐phase project to scrape “A‑rated Medical Billing” listings from BBB, wrap it in an LLM‑driven Stagehand module, and surface results in a Next.js + Supabase web app.
-
----
-
-## Table of Contents
-
-1. [Overview](#overview)  
-2. [Phase A: Python Scraper](#phase-a-python-scraper)  
-3. [Phase B: Stagehand Automation Module](#phase-b-stagehand-automation-module)  
-4. [Phase C: Web App & Database Integration](#phase-c-web-app--database-integration)  
-5. [Getting Started](#getting-started)  
-6. [Configuration & Environment Variables](#configuration--environment-variables)  
-7. [Troubleshooting](#troubleshooting)  
-
----
+This project utilizes advanced LLM-based web-scraping, a persistent storage database using Supabase, and next.js/React frontend interface.
 
 ## Overview
 
