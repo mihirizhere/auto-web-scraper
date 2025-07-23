@@ -1,5 +1,5 @@
 import { Stagehand } from "@browserbasehq/stagehand";
-import StagehandConfig from "./stagehand.config.js";
+import StagehandConfig from "./stagehand.config.ts";
 import chalk from "chalk";
 import { z } from "zod";
 import fs from "fs";
@@ -79,7 +79,7 @@ function normalizeUrl(url: string): string {
   return `https://www.bbb.org/${url}`;
 }
 
-// ——— MAIN SCRAPER ————————————————————————————————
+// ——— MAIN SCRAPER
 async function scrapeBBBMedicalBilling({
   stagehand,
   baseUrl,
@@ -92,7 +92,7 @@ async function scrapeBBBMedicalBilling({
   const allBusinesses: CompleteBusiness[] = [];
   const seen = new Set<string>();
 
-  console.log(chalk.blue(`🚀 Starting scraper: ${maxPages} pages max`));
+  console.log(chalk.blue(`Starting scraper: ${maxPages} pages max`));
 
   for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
     const pageUrl = baseUrl.replace(/page=\d+/, `page=${pageNum}`);
@@ -116,7 +116,7 @@ async function scrapeBBBMedicalBilling({
       } catch {}
 
       // Extract business names and phones first (without URLs to avoid hallucination)
-      console.log(chalk.gray("🔍 Extracting business info (without URLs)..."));
+      console.log(chalk.gray("Extracting business info (without URLs)..."));
       const basicInfoSchema = z.object({
         businesses: z.array(z.object({
           name: z.string().describe("Company name"),
@@ -177,11 +177,9 @@ async function scrapeBBBMedicalBilling({
               url: newUrl,
             });
             
-            // Go back to search results
             await stagehand.page.goBack();
             await delay(1500);
             
-            // Verify we're back on search results
             const backUrl = stagehand.page.url();
             if (!backUrl.includes('search')) {
               console.log(chalk.yellow("Not on search page, re-navigating"));
@@ -190,7 +188,7 @@ async function scrapeBBBMedicalBilling({
             }
             
           } else {
-            console.log(chalk.yellow(`    No navigation for ${business.name} (${currentUrl} -> ${newUrl})`));
+            console.log(chalk.yellow(`No navigation for ${business.name} (${currentUrl} -> ${newUrl})`));
           }
           
         } catch (clickError) {
@@ -234,7 +232,6 @@ async function scrapeBBBMedicalBilling({
           console.log(chalk.gray(`Processing: ${card.name}`));
           console.log(chalk.gray(`URL: ${detailUrl}`));
 
-          // We already navigated here during URL collection, so the page might already be loaded
           const currentUrl = stagehand.page.url();
           if (currentUrl !== detailUrl) {
             await stagehand.page.goto(detailUrl, { waitUntil: 'networkidle' });
